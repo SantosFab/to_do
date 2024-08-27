@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.colors.primary}
+    background-color: ${({ theme }) => theme.background.black};
   }
 `;
 

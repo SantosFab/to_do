@@ -17,10 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
+      <body className={`${inter.className} container mx-auto`}>
         <StyledComponentsRegistry>
-          {" "}
-          <ThemeClient>{children}</ThemeClient>{" "}
+          <ThemeClient>{children}</ThemeClient>
         </StyledComponentsRegistry>
       </body>
     </html>
