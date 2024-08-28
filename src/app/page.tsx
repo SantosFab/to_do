@@ -1,6 +1,7 @@
 "use client";
 import { ChangeEvent, useState } from "react";
 import * as Styled from "./styled";
+import { TodoContainer } from "@/component/ToDoContainer/ToDoContainer";
 
 export default function Home() {
   const [textInput, setTextInput] = useState<string>("");
@@ -24,9 +25,19 @@ export default function Home() {
             Add
           </Styled.StyledButtonTop>
         </div>
-        {toDoList.map((ToDo, index) => (
-          <Styled.StyledToDo key={index}>{ToDo}</Styled.StyledToDo>
-        ))}
+        {toDoList.map((toDo, index) => {
+          const first = index === 0;
+          const last = index === toDoList.length - 1;
+          return (
+            <TodoContainer
+              key={index}
+              checked={false}
+              isFirst={first}
+              isLast={last}
+              toDo={toDo}
+            />
+          );
+        })}
       </Styled.StyledContainerToDo>
 
       <Styled.StyledButtonBottom onClick={handleTodoList}>

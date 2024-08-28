@@ -13,7 +13,6 @@ export const StyledContainerToDo = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 40px;
-    color: red;
   `}
 `;
 
@@ -28,7 +27,7 @@ export const StyledInput = styled.input`
 export const StyledButtonTop = styled.button`
   ${({ theme }) => css`
     font-size: 20px;
-    padding: 3px;
+    padding: 7px;
     min-width: 5%;
     background-color: ${theme.background.brownLight};
     margin-left: 10px;
@@ -36,21 +35,9 @@ export const StyledButtonTop = styled.button`
   `}
 `;
 
-export const StyledToDo = styled.p`
-  ${({ theme }) => css`
-    display: inline-block;
-    width: calc(75% + 15px);
-    margin-top: 20px;
-    background-color: ${theme.background.brownLight};
-    &:first-of-type {
-      margin-top: 80px;
-    }
-  `}
-`;
-
 export const StyledButtonBottom = styled.button`
   ${({ theme }) => css`
-    position: absolute;
+    position: fixed;
     bottom: 50px;
     right: 50px;
     height: 60px;
