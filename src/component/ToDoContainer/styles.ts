@@ -47,8 +47,15 @@ export const StyledTodoContainer = styled.div<ToDoContainerProps>`
 `;
 
 export const StyledToDo = styled.p`
-  ${({ theme }) => css`
+  ${({}) => css`
     display: inline-block;
     font-size: 1.1vw;
+  `}
+`;
+
+export const StyledIconContainer = styled.div`
+  ${({}) => css`
+    width: 24px;
+    height: 24px;
   `}
 `;

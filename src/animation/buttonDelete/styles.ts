@@ -8,6 +8,7 @@ export const StyledButtonDeleteIcon = styled.button`
       position: relative;
       border: none;
       margin-left: 10px;
+      margin-right: 10px;
       width: 14px;
       height: 14px;
     }
