@@ -2,14 +2,10 @@
 import { ChangeEvent, useState } from "react";
 import { TodoContainer } from "@/component/ToDoContainer/ToDoContainer";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import { onDragEnd, ToDoListProps } from "./script";
 import * as Styled from "./styled";
 
 export default function Home() {
-  interface ToDoListProps {
-    id: number;
-    toDo: string;
-  }
-
   const [textInput, setTextInput] = useState<string>("");
   const [toDoList, setToDoList] = useState<ToDoListProps[]>([]);
 
@@ -25,16 +21,8 @@ export default function Home() {
     }
   };
 
-  const onDragEnd = (result: any) => {
-    const { source, destination } = result;
-
-    if (!destination) return;
-
-    const reorderedList = Array.from(toDoList);
-    const [removed] = reorderedList.splice(source.index, 1);
-    reorderedList.splice(destination.index, 0, removed);
-
-    setToDoList(reorderedList);
+  const handleOnDragEnd = (result: any) => {
+    onDragEnd({ result, setToDoList, toDoList });
   };
 
   return (
@@ -50,7 +38,7 @@ export default function Home() {
             Add
           </Styled.StyledButtonTop>
         </div>
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="toDoList">
             {(provided) => (
               <div
