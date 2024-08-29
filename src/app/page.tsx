@@ -2,28 +2,34 @@
 import { ChangeEvent, useState } from "react";
 import { TodoContainer } from "@/component/ToDoContainer/ToDoContainer";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
-import { onDragEnd, ToDoListProps } from "./script";
+import { ToDoListProps } from "./interface";
+import {
+  AddToDoList,
+  OnDragEnd,
+  CheckedToDoList,
+  RemoveToDoList,
+  ChangeTextInput,
+} from "./script";
 import * as Styled from "./styled";
 
 export default function Home() {
   const [textInput, setTextInput] = useState<string>("");
   const [toDoList, setToDoList] = useState<ToDoListProps[]>([]);
 
-  const handleTextInput = (event: ChangeEvent<HTMLInputElement>) =>
-    setTextInput(event.target.value);
+  const handleChangeTextInput = (event: ChangeEvent<HTMLInputElement>) =>
+    ChangeTextInput({ event, setTextInput });
 
-  const handleTodoList = () => {
-    if (textInput.trim() !== "") {
-      setToDoList((current) => [
-        ...current,
-        { id: Date.now(), toDo: textInput },
-      ]);
-    }
-  };
+  const handleAddToDoList = () =>
+    AddToDoList({ setToDoList, textInput, setTextInput });
 
-  const handleOnDragEnd = (result: any) => {
-    onDragEnd({ result, setToDoList, toDoList });
-  };
+  const handleCheckedToDoList = (index: number) =>
+    CheckedToDoList({ index, setToDoList });
+
+  const handleRemoveToDoList = (index: number) =>
+    RemoveToDoList({ index, setToDoList });
+
+  const handleOnDragEnd = (result: any) =>
+    OnDragEnd({ result, setToDoList, toDoList });
 
   return (
     <Styled.StyledHome>
@@ -32,9 +38,9 @@ export default function Home() {
           <Styled.StyledInput
             type="text"
             value={textInput}
-            onChange={handleTextInput}
+            onChange={handleChangeTextInput}
           />
-          <Styled.StyledButtonTop onClick={handleTodoList}>
+          <Styled.StyledButtonTop onClick={handleAddToDoList}>
             Add
           </Styled.StyledButtonTop>
         </div>
@@ -51,9 +57,12 @@ export default function Home() {
                     key={toDo.id}
                     id={toDo.id}
                     index={index}
-                    toDo={toDo.toDo}
                     isFirst={index === 0}
                     isLast={index === toDoList.length - 1}
+                    toDo={toDo.toDo}
+                    checked={toDo.isCompleted}
+                    onChangeCheckBox={() => handleCheckedToDoList(index)}
+                    onClickButtonDelete={() => handleRemoveToDoList(index)}
                   />
                 ))}
                 {provided.placeholder}
@@ -62,7 +71,7 @@ export default function Home() {
           </Droppable>
         </DragDropContext>
       </Styled.StyledContainerToDo>
-      <Styled.StyledButtonBottom onClick={handleTodoList}>
+      <Styled.StyledButtonBottom onClick={handleAddToDoList}>
         +
       </Styled.StyledButtonBottom>
     </Styled.StyledHome>

@@ -1,17 +1,66 @@
-import { Dispatch, SetStateAction } from "react";
+import {
+  AddToDoListProps,
+  ChangeTextInputProps,
+  CheckedToDoListProps,
+  OnDragEndProps,
+  RemoveToDoListProps,
+} from "./interface";
 
-export interface ToDoListProps {
-  id: number;
-  toDo: string;
-}
+export const ChangeTextInput = ({
+  event,
+  setTextInput,
+}: ChangeTextInputProps) => {
+  setTextInput(() => {
+    const value = event.target.value;
+    if (value === " ") {
+      return "";
+    }
 
-interface OnDragEndProps {
-  result: any;
-  toDoList: ToDoListProps[];
-  setToDoList: Dispatch<SetStateAction<ToDoListProps[]>>;
-}
+    return value;
+  });
+};
 
-export const onDragEnd = ({
+export const AddToDoList = ({
+  setToDoList,
+  setTextInput,
+  textInput,
+}: AddToDoListProps) => {
+  if (textInput.trim() !== "") {
+    setToDoList((current) => [
+      ...current,
+      { id: Date.now(), toDo: textInput, isCompleted: false },
+    ]);
+    setTextInput("");
+  }
+};
+
+export const CheckedToDoList = ({
+  index,
+  setToDoList,
+}: CheckedToDoListProps) => {
+  setToDoList((current) => {
+    const newToDoList = [...current];
+
+    newToDoList[index] = {
+      ...newToDoList[index],
+      isCompleted: !newToDoList[index].isCompleted,
+    };
+
+    return newToDoList;
+  });
+};
+
+export const RemoveToDoList = ({ index, setToDoList }: RemoveToDoListProps) => {
+  setToDoList((current) => {
+    const newToDoList = [...current];
+
+    newToDoList.splice(index, 1);
+
+    return newToDoList;
+  });
+};
+
+export const OnDragEnd = ({
   result,
   setToDoList,
   toDoList,

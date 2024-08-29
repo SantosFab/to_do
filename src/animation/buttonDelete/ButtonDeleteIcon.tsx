@@ -1,15 +1,15 @@
 import { FunctionComponent } from "react";
 import * as Styled from "./styles";
 interface ButtonDeleteIconProps {
-  onClick?: () => void;
+  onClickButtonDelete?: () => void;
 }
 
 export const ButtonDeleteIcon: FunctionComponent<ButtonDeleteIconProps> = ({
-  onClick,
+  onClickButtonDelete,
 }) => {
   /* From Uiverse.io by vinodjangid07 */
   return (
-    <Styled.StyledButtonDeleteIcon onClick={onClick}>
+    <Styled.StyledButtonDeleteIcon onClick={onClickButtonDelete}>
       <svg
         viewBox="0 0 15 17.5"
         height="15.5"

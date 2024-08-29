@@ -8,26 +8,33 @@ import { Draggable, DraggableProvided } from "@hello-pangea/dnd";
 import * as Styled from "./styles";
 
 interface TodoContainerProps {
-  toDo: string;
+  checked?: boolean;
   id: number;
   index: number;
   isFirst?: boolean;
   isLast?: boolean;
+  onChangeCheckBox?: () => void;
+  onClickButtonDelete?: () => void;
+
+  toDo: string;
 }
 
 export const TodoContainer: FunctionComponent<TodoContainerProps> = ({
-  toDo,
+  checked,
   id,
   index,
   isFirst,
   isLast,
+  onChangeCheckBox,
+  onClickButtonDelete,
+  toDo,
 }) => {
   return (
     <Styled.StyledTodoContainer $isFirst={isFirst} $isLast={isLast}>
       <Styled.StyledToDo>{toDo}</Styled.StyledToDo>
       <div className="flex items-center">
-        <CheckBoxIcon checked={false} />
-        <ButtonDeleteIcon onClick={() => console.log("Delete item")} />
+        <CheckBoxIcon checked={checked} onChangeCheckBox={onChangeCheckBox} />
+        <ButtonDeleteIcon onClickButtonDelete={onClickButtonDelete} />
         <Styled.StyledIconContainer>
           <Draggable draggableId={`item-${id}`} index={index}>
             {(provided: DraggableProvided) => (
