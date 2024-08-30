@@ -1,6 +1,6 @@
 "use client";
 import { ChangeEvent, useState } from "react";
-import { TodoContainer } from "@/component/ToDoContainer/ToDoContainer";
+import { ToDoContainer } from "@/component/ToDoContainer/ToDoContainer";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { ToDoListProps } from "./interface";
 import {
@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <Styled.StyledHome>
-      <Styled.StyledContainerToDo>
+      <Styled.StyledContainer>
         <div className="w-full mx-auto flex justify-center">
           <Styled.StyledInput
             type="text"
@@ -53,7 +53,7 @@ export default function Home() {
                 className="w-full flex flex-col items-center"
               >
                 {toDoList.map((toDo, index) => (
-                  <TodoContainer
+                  <ToDoContainer
                     key={toDo.id}
                     id={toDo.id}
                     index={index}
@@ -70,7 +70,7 @@ export default function Home() {
             )}
           </Droppable>
         </DragDropContext>
-      </Styled.StyledContainerToDo>
+      </Styled.StyledContainer>
       <Styled.StyledButtonBottom onClick={handleAddToDoList}>
         +
       </Styled.StyledButtonBottom>

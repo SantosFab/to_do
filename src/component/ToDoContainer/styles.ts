@@ -5,7 +5,7 @@ interface ToDoContainerProps {
   $isLast?: boolean;
 }
 
-export const StyledTodoContainer = styled.div<ToDoContainerProps>`
+export const StyledToDoContainer = styled.div<ToDoContainerProps>`
   ${({ theme, $isFirst, $isLast }) => css`
     display: flex;
     justify-content: space-between;
@@ -53,7 +53,7 @@ export const StyledToDo = styled.p`
   `}
 `;
 
-export const StyledIconContainer = styled.div`
+export const StyledDragContainer = styled.div`
   ${({}) => css`
     width: 24px;
     height: 24px;

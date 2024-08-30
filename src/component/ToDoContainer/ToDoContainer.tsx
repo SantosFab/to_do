@@ -19,7 +19,7 @@ interface TodoContainerProps {
   toDo: string;
 }
 
-export const TodoContainer: FunctionComponent<TodoContainerProps> = ({
+export const ToDoContainer: FunctionComponent<TodoContainerProps> = ({
   checked,
   id,
   index,
@@ -30,12 +30,12 @@ export const TodoContainer: FunctionComponent<TodoContainerProps> = ({
   toDo,
 }) => {
   return (
-    <Styled.StyledTodoContainer $isFirst={isFirst} $isLast={isLast}>
+    <Styled.StyledToDoContainer $isFirst={isFirst} $isLast={isLast}>
       <Styled.StyledToDo>{toDo}</Styled.StyledToDo>
       <div className="flex items-center">
         <CheckBoxIcon checked={checked} onChangeCheckBox={onChangeCheckBox} />
         <ButtonDeleteIcon onClickButtonDelete={onClickButtonDelete} />
-        <Styled.StyledIconContainer>
+        <Styled.StyledDragContainer>
           <Draggable draggableId={`item-${id}`} index={index}>
             {(provided: DraggableProvided) => (
               <div
@@ -47,8 +47,8 @@ export const TodoContainer: FunctionComponent<TodoContainerProps> = ({
               </div>
             )}
           </Draggable>
-        </Styled.StyledIconContainer>
+        </Styled.StyledDragContainer>
       </div>
-    </Styled.StyledTodoContainer>
+    </Styled.StyledToDoContainer>
   );
 };

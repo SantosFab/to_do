@@ -7,7 +7,7 @@ export const StyledHome = styled.main`
   `}
 `;
 
-export const StyledContainerToDo = styled.div`
+export const StyledContainer = styled.div`
   ${({}) => css`
     display: flex;
     flex-direction: column;
