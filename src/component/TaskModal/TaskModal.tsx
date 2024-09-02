@@ -1,7 +1,7 @@
 import { Dispatch, FunctionComponent, SetStateAction, useRef } from "react";
-import * as Styled from "./styles";
 import { useModalOverlay } from "@/hook/useModalOverlay/UseModalOverlay";
 import { useKeyListener } from "@/hook/useKeyListener/UseKeyListener";
+import * as Styled from "./styles";
 
 interface TaskModalProps {
   showModal: boolean;

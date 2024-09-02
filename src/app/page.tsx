@@ -3,6 +3,8 @@ import { ChangeEvent, useRef, useState } from "react";
 import { TaskContainer } from "@/component/TaskContainer/TaskContainer";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { TaskListProps } from "./interface";
+import { TaskModal } from "@/component/TaskModal/TaskModal";
+import { useKeyListener } from "@/hook/useKeyListener/UseKeyListener";
 import {
   AddTaskList,
   OnDragEnd,
@@ -11,8 +13,6 @@ import {
   ChangeTextInput,
 } from "./script";
 import * as Styled from "./styled";
-import { TaskModal } from "@/component/TaskModal/TaskModal";
-import { useKeyListener } from "@/hook/useKeyListener/UseKeyListener";
 
 export default function Home() {
   const [textInput, setTextInput] = useState<string>("");

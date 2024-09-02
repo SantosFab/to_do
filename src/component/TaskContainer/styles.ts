@@ -11,7 +11,7 @@ export const StyledTaskContainer = styled.div<TaskContainerProps>`
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    width: calc(75% + 15px);
+    width: calc(84% + 10px);
     color: white;
 
     &:nth-child(4n) {
