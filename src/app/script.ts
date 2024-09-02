@@ -1,9 +1,9 @@
 import {
-  AddToDoListProps,
+  AddTaskListProps,
   ChangeTextInputProps,
-  CheckedToDoListProps,
+  CheckedTaskListProps,
   OnDragEndProps,
-  RemoveToDoListProps,
+  RemoveTaskListProps,
 } from "./interface";
 
 export const ChangeTextInput = ({
@@ -20,58 +20,58 @@ export const ChangeTextInput = ({
   });
 };
 
-export const AddToDoList = ({
-  setToDoList,
+export const AddTaskList = ({
+  setTaskList,
   setTextInput,
   textInput,
-}: AddToDoListProps) => {
+}: AddTaskListProps) => {
   if (textInput.trim() !== "") {
-    setToDoList((current) => [
+    setTaskList((current) => [
       ...current,
-      { id: Date.now(), toDo: textInput, isCompleted: false },
+      { id: Date.now(), Task: textInput, isCompleted: false },
     ]);
     setTextInput("");
   }
 };
 
-export const CheckedToDoList = ({
+export const CheckedTaskList = ({
   index,
-  setToDoList,
-}: CheckedToDoListProps) => {
-  setToDoList((current) => {
-    const newToDoList = [...current];
+  setTaskList,
+}: CheckedTaskListProps) => {
+  setTaskList((current) => {
+    const newTaskList = [...current];
 
-    newToDoList[index] = {
-      ...newToDoList[index],
-      isCompleted: !newToDoList[index].isCompleted,
+    newTaskList[index] = {
+      ...newTaskList[index],
+      isCompleted: !newTaskList[index].isCompleted,
     };
 
-    return newToDoList;
+    return newTaskList;
   });
 };
 
-export const RemoveToDoList = ({ index, setToDoList }: RemoveToDoListProps) => {
-  setToDoList((current) => {
-    const newToDoList = [...current];
+export const RemoveTaskList = ({ index, setTaskList }: RemoveTaskListProps) => {
+  setTaskList((current) => {
+    const newTaskList = [...current];
 
-    newToDoList.splice(index, 1);
+    newTaskList.splice(index, 1);
 
-    return newToDoList;
+    return newTaskList;
   });
 };
 
 export const OnDragEnd = ({
   result,
-  setToDoList,
-  toDoList,
+  setTaskList,
+  TaskList,
 }: OnDragEndProps) => {
   const { source, destination } = result;
 
   if (!destination) return;
 
-  const reorderedList = Array.from(toDoList);
+  const reorderedList = Array.from(TaskList);
   const [removed] = reorderedList.splice(source.index, 1);
   reorderedList.splice(destination.index, 0, removed);
 
-  setToDoList(reorderedList);
+  setTaskList(reorderedList);
 };

@@ -1,35 +1,35 @@
 "use client";
 import { ChangeEvent, useState } from "react";
-import { ToDoContainer } from "@/component/ToDoContainer/ToDoContainer";
+import { TaskContainer } from "@/component/TaskContainer/TaskContainer";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
-import { ToDoListProps } from "./interface";
+import { TaskListProps } from "./interface";
 import {
-  AddToDoList,
+  AddTaskList,
   OnDragEnd,
-  CheckedToDoList,
-  RemoveToDoList,
+  CheckedTaskList,
+  RemoveTaskList,
   ChangeTextInput,
 } from "./script";
 import * as Styled from "./styled";
 
 export default function Home() {
   const [textInput, setTextInput] = useState<string>("");
-  const [toDoList, setToDoList] = useState<ToDoListProps[]>([]);
+  const [TaskList, setTaskList] = useState<TaskListProps[]>([]);
 
   const handleChangeTextInput = (event: ChangeEvent<HTMLInputElement>) =>
     ChangeTextInput({ event, setTextInput });
 
-  const handleAddToDoList = () =>
-    AddToDoList({ setToDoList, textInput, setTextInput });
+  const handleAddTaskList = () =>
+    AddTaskList({ setTaskList, textInput, setTextInput });
 
-  const handleCheckedToDoList = (index: number) =>
-    CheckedToDoList({ index, setToDoList });
+  const handleCheckedTaskList = (index: number) =>
+    CheckedTaskList({ index, setTaskList });
 
-  const handleRemoveToDoList = (index: number) =>
-    RemoveToDoList({ index, setToDoList });
+  const handleRemoveTaskList = (index: number) =>
+    RemoveTaskList({ index, setTaskList });
 
   const handleOnDragEnd = (result: any) =>
-    OnDragEnd({ result, setToDoList, toDoList });
+    OnDragEnd({ result, setTaskList, TaskList });
 
   return (
     <Styled.StyledHome>
@@ -40,29 +40,29 @@ export default function Home() {
             value={textInput}
             onChange={handleChangeTextInput}
           />
-          <Styled.StyledButtonTop onClick={handleAddToDoList}>
+          <Styled.StyledButtonTop onClick={handleAddTaskList}>
             Add
           </Styled.StyledButtonTop>
         </div>
         <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="toDoList">
+          <Droppable droppableId="TaskList">
             {(provided) => (
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
                 className="w-full flex flex-col items-center"
               >
-                {toDoList.map((toDo, index) => (
-                  <ToDoContainer
-                    key={toDo.id}
-                    id={toDo.id}
+                {TaskList.map((Task, index) => (
+                  <TaskContainer
+                    key={Task.id}
+                    id={Task.id}
                     index={index}
                     isFirst={index === 0}
-                    isLast={index === toDoList.length - 1}
-                    toDo={toDo.toDo}
-                    checked={toDo.isCompleted}
-                    onChangeCheckBox={() => handleCheckedToDoList(index)}
-                    onClickButtonDelete={() => handleRemoveToDoList(index)}
+                    isLast={index === TaskList.length - 1}
+                    Task={Task.Task}
+                    checked={Task.isCompleted}
+                    onChangeCheckBox={() => handleCheckedTaskList(index)}
+                    onClickButtonDelete={() => handleRemoveTaskList(index)}
                   />
                 ))}
                 {provided.placeholder}
@@ -71,7 +71,7 @@ export default function Home() {
           </Droppable>
         </DragDropContext>
       </Styled.StyledContainer>
-      <Styled.StyledButtonBottom onClick={handleAddToDoList}>
+      <Styled.StyledButtonBottom onClick={handleAddTaskList}>
         +
       </Styled.StyledButtonBottom>
     </Styled.StyledHome>

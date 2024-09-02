@@ -1,30 +1,30 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
-export interface ToDoListProps {
+export interface TaskListProps {
   id: number;
-  toDo: string;
+  Task: string;
   isCompleted: boolean;
 }
 
-interface DefaultToDoDispatch {
-  setToDoList: Dispatch<SetStateAction<ToDoListProps[]>>;
+interface DefaultTaskDispatch {
+  setTaskList: Dispatch<SetStateAction<TaskListProps[]>>;
 }
 
-export interface AddToDoListProps extends DefaultToDoDispatch {
+export interface AddTaskListProps extends DefaultTaskDispatch {
   textInput: string;
   setTextInput: Dispatch<SetStateAction<string>>;
 }
 
-export interface CheckedToDoListProps extends DefaultToDoDispatch {
+export interface CheckedTaskListProps extends DefaultTaskDispatch {
   index: number;
 }
 
-export interface OnDragEndProps extends DefaultToDoDispatch {
+export interface OnDragEndProps extends DefaultTaskDispatch {
   result: any;
-  toDoList: ToDoListProps[];
+  TaskList: TaskListProps[];
 }
 
-export interface RemoveToDoListProps extends DefaultToDoDispatch {
+export interface RemoveTaskListProps extends DefaultTaskDispatch {
   index: number;
 }
 

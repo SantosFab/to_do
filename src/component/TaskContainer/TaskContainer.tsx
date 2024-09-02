@@ -7,7 +7,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Draggable, DraggableProvided } from "@hello-pangea/dnd";
 import * as Styled from "./styles";
 
-interface TodoContainerProps {
+interface TaskContainerProps {
   checked?: boolean;
   id: number;
   index: number;
@@ -15,11 +15,10 @@ interface TodoContainerProps {
   isLast?: boolean;
   onChangeCheckBox?: () => void;
   onClickButtonDelete?: () => void;
-
-  toDo: string;
+  Task: string;
 }
 
-export const ToDoContainer: FunctionComponent<TodoContainerProps> = ({
+export const TaskContainer: FunctionComponent<TaskContainerProps> = ({
   checked,
   id,
   index,
@@ -27,11 +26,11 @@ export const ToDoContainer: FunctionComponent<TodoContainerProps> = ({
   isLast,
   onChangeCheckBox,
   onClickButtonDelete,
-  toDo,
+  Task,
 }) => {
   return (
-    <Styled.StyledToDoContainer $isFirst={isFirst} $isLast={isLast}>
-      <Styled.StyledToDo>{toDo}</Styled.StyledToDo>
+    <Styled.StyledTaskContainer $isFirst={isFirst} $isLast={isLast}>
+      <Styled.StyledTask>{Task}</Styled.StyledTask>
       <div className="flex items-center">
         <CheckBoxIcon checked={checked} onChangeCheckBox={onChangeCheckBox} />
         <ButtonDeleteIcon onClickButtonDelete={onClickButtonDelete} />
@@ -49,6 +48,6 @@ export const ToDoContainer: FunctionComponent<TodoContainerProps> = ({
           </Draggable>
         </Styled.StyledDragContainer>
       </div>
-    </Styled.StyledToDoContainer>
+    </Styled.StyledTaskContainer>
   );
 };

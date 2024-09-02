@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
-interface ToDoContainerProps {
+interface TaskContainerProps {
   $isFirst?: boolean;
   $isLast?: boolean;
 }
 
-export const StyledToDoContainer = styled.div<ToDoContainerProps>`
+export const StyledTaskContainer = styled.div<TaskContainerProps>`
   ${({ theme, $isFirst, $isLast }) => css`
     display: flex;
     justify-content: space-between;
@@ -46,7 +46,7 @@ export const StyledToDoContainer = styled.div<ToDoContainerProps>`
   `}
 `;
 
-export const StyledToDo = styled.p`
+export const StyledTask = styled.p`
   ${({}) => css`
     display: inline-block;
     font-size: 1.1vw;
