@@ -12,9 +12,9 @@ export const TaskModal: FunctionComponent<TaskModalProps> = ({
   showModal,
   setShowModal,
 }) => {
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   useModalOverlay({ modalRef, setShowModal });
-  useKeyListener({ key: "Escape", callback: () => setShowModal(false) });
+  useKeyListener("Escape", () => setShowModal(false));
 
   return (
     <Styled.StyledTaskModalOverlay $showModal={showModal}>

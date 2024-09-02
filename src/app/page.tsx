@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { TaskContainer } from "@/component/TaskContainer/TaskContainer";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { TaskListProps } from "./interface";
@@ -12,11 +12,13 @@ import {
 } from "./script";
 import * as Styled from "./styled";
 import { TaskModal } from "@/component/TaskModal/TaskModal";
+import { useKeyListener } from "@/hook/useKeyListener/UseKeyListener";
 
 export default function Home() {
   const [textInput, setTextInput] = useState<string>("");
   const [taskList, setTaskList] = useState<TaskListProps[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChangeTextInput = (event: ChangeEvent<HTMLInputElement>) =>
     ChangeTextInput({ event, setTextInput });
@@ -33,6 +35,13 @@ export default function Home() {
   const handleOnDragEnd = (result: any) =>
     OnDragEnd({ result, setTaskList, TaskList: taskList });
 
+  const handleKeyEnter = () => {
+    handleAddTaskList();
+    inputRef.current?.focus();
+  };
+
+  useKeyListener("Enter", handleKeyEnter);
+
   return (
     <Styled.StyledHome>
       <Styled.StyledContainer>
@@ -42,6 +51,7 @@ export default function Home() {
             value={textInput}
             onChange={handleChangeTextInput}
             autoFocus
+            ref={inputRef}
           />
           <Styled.StyledButtonTop onClick={handleAddTaskList}>
             Add

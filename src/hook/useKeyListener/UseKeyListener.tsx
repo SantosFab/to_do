@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 
-interface UseKeyListenerProps {
-  callback: () => void;
-  key: string;
-}
-
-export const useKeyListener = ({ callback, key }: UseKeyListenerProps) => {
+export const useKeyListener = (key: string, callback: () => void) => {
   useEffect(() => {
     const handleKeyUp = (event: KeyboardEvent) => {
       if (event.key === key) {
