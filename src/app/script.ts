@@ -8,9 +8,9 @@ import {
 
 export const ChangeTextInput = ({
   event,
-  setTextInput,
+  dispatchInput,
 }: ChangeTextInputProps) => {
-  setTextInput(() => {
+  dispatchInput(() => {
     const value = event.target.value;
     if (value === " ") {
       return "";
@@ -22,15 +22,15 @@ export const ChangeTextInput = ({
 
 export const AddTaskList = ({
   setTaskList,
-  setTextInput,
-  textInput,
+  dispatchInput,
+  Input,
 }: AddTaskListProps) => {
-  if (textInput.trim() !== "") {
+  if (Input.trim() !== "") {
     setTaskList((current) => [
       ...current,
-      { id: Date.now(), Task: textInput, isCompleted: false },
+      { id: Date.now(), Task: Input, isCompleted: false },
     ]);
-    setTextInput("");
+    dispatchInput("");
   }
 };
 

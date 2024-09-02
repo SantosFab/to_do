@@ -13,18 +13,35 @@ import {
   ChangeTextInput,
 } from "./script";
 import * as Styled from "./styled";
+import { NewTask } from "@/component/NewTask/NewTask";
 
 export default function Home() {
   const [textInput, setTextInput] = useState<string>("");
+  const [textInputModal, setTextInputModal] = useState<string>("");
   const [taskList, setTaskList] = useState<TaskListProps[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const inputModalRef = useRef<HTMLInputElement>(null);
 
   const handleChangeTextInput = (event: ChangeEvent<HTMLInputElement>) =>
-    ChangeTextInput({ event, setTextInput });
+    ChangeTextInput({ event, dispatchInput: setTextInput });
+
+  const handleChangeTextInputModal = (event: ChangeEvent<HTMLInputElement>) =>
+    ChangeTextInput({ event, dispatchInput: setTextInputModal });
 
   const handleAddTaskList = () =>
-    AddTaskList({ setTaskList, textInput: textInput, setTextInput });
+    AddTaskList({
+      setTaskList,
+      Input: textInput,
+      dispatchInput: setTextInput,
+    });
+
+  const handleAddTaskListModal = () =>
+    AddTaskList({
+      setTaskList,
+      Input: textInputModal,
+      dispatchInput: setTextInputModal,
+    });
 
   const handleCheckedTaskList = (index: number) =>
     CheckedTaskList({ index, setTaskList });
@@ -45,18 +62,12 @@ export default function Home() {
   return (
     <Styled.StyledHome>
       <Styled.StyledContainer>
-        <div className="w-full mx-auto flex justify-center">
-          <Styled.StyledInput
-            type="text"
-            value={textInput}
-            onChange={handleChangeTextInput}
-            autoFocus
-            ref={inputRef}
-          />
-          <Styled.StyledButtonTop onClick={handleAddTaskList}>
-            Add
-          </Styled.StyledButtonTop>
-        </div>
+        <NewTask
+          AddTaskList={handleAddTaskList}
+          ChangeTextInput={handleChangeTextInput}
+          inputRef={inputRef}
+          textInput={textInput}
+        />
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="TaskList">
             {(provided) => (
@@ -83,7 +94,15 @@ export default function Home() {
             )}
           </Droppable>
         </DragDropContext>
-        <TaskModal showModal={showModal} setShowModal={setShowModal} />
+        {showModal && (
+          <TaskModal
+            setShowModal={setShowModal}
+            AddTaskList={handleAddTaskListModal}
+            ChangeTextInput={handleChangeTextInputModal}
+            inputRef={inputModalRef}
+            textInput={textInputModal}
+          />
+        )}
       </Styled.StyledContainer>
       <Styled.StyledButtonBottom
         onClick={() => {

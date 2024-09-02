@@ -1,12 +1,7 @@
 import styled, { css } from "styled-components";
 
-interface TaskModalPropsOverlay {
-  $showModal?: boolean;
-}
-
-export const StyledTaskModalOverlay = styled.div<TaskModalPropsOverlay>`
-  ${({ $showModal }) => css`
-    display: ${$showModal ? "block" : "none"};
+export const StyledTaskModalOverlay = styled.div`
+  ${({}) => css`
     position: fixed;
     top: 0;
     left: 0;
@@ -22,22 +17,27 @@ export const StyledTaskModalContent = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
     z-index: 10;
-    background-color: red;
+    width: calc(80% + 10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   `}
 `;
 
-export const StyledIsClose = styled.button`
+export const StyledButtonContainer = styled.div`
   ${({}) => css`
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
+    display: flex;
+    justify-content: end;
+    width: calc(80% + 10px);
+
+    & button {
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 35px;
+    }
   `}
 `;

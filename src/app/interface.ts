@@ -11,8 +11,8 @@ interface DefaultTaskDispatch {
 }
 
 export interface AddTaskListProps extends DefaultTaskDispatch {
-  textInput: string;
-  setTextInput: Dispatch<SetStateAction<string>>;
+  Input: string;
+  dispatchInput: Dispatch<SetStateAction<string>>;
 }
 
 export interface CheckedTaskListProps extends DefaultTaskDispatch {
@@ -30,5 +30,5 @@ export interface RemoveTaskListProps extends DefaultTaskDispatch {
 
 export interface ChangeTextInputProps {
   event: ChangeEvent<HTMLInputElement>;
-  setTextInput: Dispatch<SetStateAction<string>>;
+  dispatchInput: Dispatch<SetStateAction<string>>;
 }
