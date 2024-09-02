@@ -11,16 +11,18 @@ import {
   ChangeTextInput,
 } from "./script";
 import * as Styled from "./styled";
+import { TaskModal } from "@/component/TaskModal/TaskModal";
 
 export default function Home() {
   const [textInput, setTextInput] = useState<string>("");
-  const [TaskList, setTaskList] = useState<TaskListProps[]>([]);
+  const [taskList, setTaskList] = useState<TaskListProps[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleChangeTextInput = (event: ChangeEvent<HTMLInputElement>) =>
     ChangeTextInput({ event, setTextInput });
 
   const handleAddTaskList = () =>
-    AddTaskList({ setTaskList, textInput, setTextInput });
+    AddTaskList({ setTaskList, textInput: textInput, setTextInput });
 
   const handleCheckedTaskList = (index: number) =>
     CheckedTaskList({ index, setTaskList });
@@ -29,7 +31,7 @@ export default function Home() {
     RemoveTaskList({ index, setTaskList });
 
   const handleOnDragEnd = (result: any) =>
-    OnDragEnd({ result, setTaskList, TaskList });
+    OnDragEnd({ result, setTaskList, TaskList: taskList });
 
   return (
     <Styled.StyledHome>
@@ -39,6 +41,7 @@ export default function Home() {
             type="text"
             value={textInput}
             onChange={handleChangeTextInput}
+            autoFocus
           />
           <Styled.StyledButtonTop onClick={handleAddTaskList}>
             Add
@@ -52,13 +55,13 @@ export default function Home() {
                 {...provided.droppableProps}
                 className="w-full flex flex-col items-center"
               >
-                {TaskList.map((Task, index) => (
+                {taskList.map((Task, index) => (
                   <TaskContainer
                     key={Task.id}
                     id={Task.id}
                     index={index}
                     isFirst={index === 0}
-                    isLast={index === TaskList.length - 1}
+                    isLast={index === taskList.length - 1}
                     Task={Task.Task}
                     checked={Task.isCompleted}
                     onChangeCheckBox={() => handleCheckedTaskList(index)}
@@ -70,8 +73,14 @@ export default function Home() {
             )}
           </Droppable>
         </DragDropContext>
+        <TaskModal showModal={showModal} setShowModal={setShowModal} />
       </Styled.StyledContainer>
-      <Styled.StyledButtonBottom onClick={handleAddTaskList}>
+      <Styled.StyledButtonBottom
+        onClick={() => {
+          handleAddTaskList;
+          setShowModal(true);
+        }}
+      >
         +
       </Styled.StyledButtonBottom>
     </Styled.StyledHome>
