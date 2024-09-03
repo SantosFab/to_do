@@ -1,10 +1,12 @@
 "use client";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useMemo, useRef, useState } from "react";
 import { TaskContainer } from "@/component/TaskContainer/TaskContainer";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { TaskListProps } from "./interface";
 import { TaskModal } from "@/component/TaskModal/TaskModal";
 import { useKeyListener } from "@/hook/useKeyListener/UseKeyListener";
+import { NewTask } from "@/component/NewTask/NewTask";
+import { usePersistedState } from "@/hook/persistedState/usePersistedState";
 import {
   AddTaskList,
   OnDragEnd,
@@ -13,12 +15,14 @@ import {
   ChangeTextInput,
 } from "./script";
 import * as Styled from "./styled";
-import { NewTask } from "@/component/NewTask/NewTask";
 
 export default function Home() {
   const [textInput, setTextInput] = useState<string>("");
   const [textInputModal, setTextInputModal] = useState<string>("");
-  const [taskList, setTaskList] = useState<TaskListProps[]>([]);
+  const [taskList, setTaskList] = usePersistedState<TaskListProps[]>(
+    "task",
+    useMemo(() => [], [])
+  );
   const [showModal, setShowModal] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const inputModalRef = useRef<HTMLInputElement>(null);
