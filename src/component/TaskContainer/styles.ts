@@ -47,9 +47,13 @@ export const StyledTaskContainer = styled.div<TaskContainerProps>`
 `;
 
 export const StyledTask = styled.p`
-  ${({}) => css`
+  ${({ theme }) => css`
     display: inline-block;
-    font-size: 1.1vw;
+    font-size: ${theme.fontSize.taskResponsive};
+
+    @media screen and (max-width: 1280px) {
+      font-size: ${theme.fontSize.taskFixed};
+    }
   `}
 `;
 

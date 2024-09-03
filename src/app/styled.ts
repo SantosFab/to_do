@@ -23,7 +23,7 @@ export const StyledButtonBottom = styled.button`
     right: 50px;
     height: 60px;
     width: 60px;
-    background-color: ${theme.background.yellowLight};
+    background-color: ${theme.background.gray};
     color: ${theme.fontColor.black};
     border-radius: 50%;
     font-size: 40px;
